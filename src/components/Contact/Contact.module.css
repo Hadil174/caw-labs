@@ -1,0 +1,491 @@
+.contact {
+  padding: 8rem 1rem;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(240, 253, 244, 0.3));
+  position: relative;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+  animation: float 20s ease-in-out infinite;
+}
+
+.contact::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 35rem;
+  height: 35rem;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-30%, 30%);
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(30%, -30%) scale(1);
+  }
+  50% {
+    transform: translate(35%, -25%) scale(1.1);
+  }
+}
+
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s;
+}
+
+.header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badge {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(163, 230, 53, 0.1));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.badge:hover::before {
+  left: 100%;
+}
+
+.badgeText {
+  color: rgb(5, 150, 105);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgb(5, 150, 105), rgb(101, 163, 13), rgb(202, 138, 4));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 4.5rem;
+  }
+}
+
+.description {
+  color: rgb(75, 85, 99);
+  font-size: 1.25rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s;
+}
+
+.contactGrid.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .contactGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.contactCard {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 1.5rem;
+}
+
+.contactCard::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.contactCard:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.contactCard:hover {
+  transform: translateY(-12px) scale(1.02);
+}
+
+.cardGlow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.5rem;
+  padding: 2px;
+  background: linear-gradient(135deg, transparent, transparent);
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 0;
+}
+
+.contactCard:hover .cardGlow {
+  opacity: 1;
+  background: linear-gradient(135deg, rgb(16, 185, 129), rgb(163, 230, 53), rgb(234, 179, 8));
+}
+
+.emeraldTeal .cardGlow {
+  background: linear-gradient(135deg, rgb(16, 185, 129), rgb(20, 184, 166));
+}
+
+.limeGreen .cardGlow {
+  background: linear-gradient(135deg, rgb(163, 230, 53), rgb(34, 197, 94));
+}
+
+.yellowAmber .cardGlow {
+  background: linear-gradient(135deg, rgb(234, 179, 8), rgb(245, 158, 11));
+}
+
+.cardContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 2rem;
+  background: white;
+  border-radius: 1.5rem;
+  border: 2px solid rgba(16, 185, 129, 0.15);
+  transition: all 0.5s;
+  z-index: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.contactCard:hover .cardContent {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: transparent;
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+}
+
+.emoji {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: grayscale(0.3);
+}
+
+.contactCard:hover .emoji {
+  transform: scale(1.3) rotate(12deg);
+  filter: grayscale(0);
+}
+
+.iconBox {
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.iconBox::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s;
+}
+
+.contactCard:hover .iconBox::before {
+  left: 100%;
+}
+
+.contactCard:hover .iconBox {
+  transform: scale(1.15) rotateY(10deg);
+}
+
+.emeraldTeal .iconBox {
+  background: linear-gradient(135deg, rgb(16, 185, 129), rgb(20, 184, 166));
+}
+
+.limeGreen .iconBox {
+  background: linear-gradient(135deg, rgb(163, 230, 53), rgb(34, 197, 94));
+}
+
+.yellowAmber .iconBox {
+  background: linear-gradient(135deg, rgb(234, 179, 8), rgb(245, 158, 11));
+}
+
+.icon {
+  width: 3rem;
+  height: 3rem;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+  transition: all 0.3s;
+}
+
+.contactCard:hover .cardTitle {
+  color: rgb(5, 150, 105);
+  transform: scale(1.05);
+}
+
+.cardValue {
+  color: rgb(107, 114, 128);
+  font-size: 0.875rem;
+  transition: all 0.3s;
+}
+
+.contactCard:hover .cardValue {
+  color: rgb(75, 85, 99);
+}
+
+.formWrapper {
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s;
+  margin-top: 2rem;
+}
+
+.formWrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.formGlow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15), transparent 70%);
+  filter: blur(40px);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.formContent {
+  position: relative;
+  background: white;
+  border-radius: 2rem;
+  padding: 3rem;
+  border: 2px solid rgba(16, 185, 129, 0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  transition: all 0.5s;
+}
+
+.formContent:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.12);
+}
+
+.formTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .formTitle {
+    font-size: 2.5rem;
+  }
+}
+
+.formEmoji {
+  font-size: 2.5rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(240, 253, 244, 0.3);
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  border-radius: 1rem;
+  color: #1f2937;
+  font-size: 1rem;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgb(156, 163, 175);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: rgb(16, 185, 129);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+  transform: translateY(-2px);
+}
+
+.textarea {
+  resize: none;
+  min-height: 150px;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgb(5, 150, 105), rgb(101, 163, 13));
+  border-radius: 1rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.submitBtn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submitBtn:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.submitBtn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+}
+
+.submitBtn:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btnIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+
+.submitBtn:hover .btnIcon {
+  transform: translateX(4px) rotate(-10deg);
+}

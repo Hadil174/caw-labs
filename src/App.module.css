@@ -1,0 +1,80 @@
+.app {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #000000;
+  overflow: hidden;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(240, 253, 244, 0.5), rgba(255, 255, 255, 1), rgba(254, 252, 232, 0.5));
+}
+
+.mouseGlow {
+  position: absolute;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 9999px;
+  filter: blur(80px);
+  transition: all 0.3s ease-out;
+}
+
+.glow1 {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(234, 179, 8, 0.08);
+  border-radius: 9999px;
+  filter: blur(80px);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.glow2 {
+  position: absolute;
+  bottom: 25%;
+  left: 33.333333%;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(163, 230, 53, 0.08);
+  border-radius: 9999px;
+  filter: blur(80px);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-delay: 1s;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+}
+
+.footer {
+  padding: 3rem 1rem;
+  border-top: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.footerContent {
+  max-width: 80rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footerText {
+  color: rgb(75, 85, 99);
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.footerCopyright {
+  color: rgb(107, 114, 128);
+}
