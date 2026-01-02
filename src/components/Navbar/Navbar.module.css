@@ -1,70 +1,155 @@
+/* ========== NAVBAR ========== */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
   z-index: 50;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.container {
+.navbarScrolled {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.08);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.navbarDefault {
+  background: transparent;
+}
+
+.navbar .container {
   max-width: 80rem;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
-.content {
+.navbar .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 5rem;
+  position: relative;
 }
 
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
 }
 
 .logoIconWrapper {
   position: relative;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(163, 230, 53, 0.1));
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.logoIconWrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.2), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s;
+}
+
+.logo:hover .logoIconWrapper::before {
+  left: 100%;
+}
+
+.logo:hover .logoIconWrapper {
+  transform: scale(1.1) rotate(5deg);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
 }
 
 .logoGlow {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgb(5, 150, 105), rgb(101, 163, 13));
-  border-radius: 0.75rem;
-  filter: blur(12px);
-  opacity: 0.3;
+  inset: -4px;
+  background: linear-gradient(135deg, rgb(16, 185, 129), rgb(163, 230, 53));
+  border-radius: 1rem;
+  filter: blur(16px);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.logo:hover .logoGlow {
+  opacity: 0.4;
 }
 
 .logoIcon {
   position: relative;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
   color: rgb(5, 150, 105);
+  transition: all 0.4s;
+  z-index: 1;
+}
+
+.logo:hover .logoIcon {
+  transform: rotate(-5deg);
+  color: rgb(4, 120, 87);
 }
 
 .logoText {
   font-size: 1.5rem;
   font-weight: 900;
-  background: linear-gradient(to right, rgb(5, 150, 105), rgb(101, 163, 13), rgb(202, 138, 4));
+  background: linear-gradient(135deg, rgb(5, 150, 105), rgb(101, 163, 13), rgb(202, 138, 4));
+  background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  animation: gradientShift 6s ease infinite;
+  position: relative;
 }
 
+.logoText::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgb(16, 185, 129), rgb(163, 230, 53));
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo:hover .logoText::after {
+  width: 100%;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Desktop Menu */
 .desktopMenu {
   display: none;
-  gap: 0.25rem;
-  background: rgba(16, 185, 129, 0.05);
-  border-radius: 9999px;
-  padding: 0.25rem;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(16, 185, 129, 0.1);
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  border-radius: 2rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
@@ -74,39 +159,109 @@
 }
 
 .navItem {
+  position: relative;
   text-transform: capitalize;
-  padding: 0.5rem 1.5rem;
-  border-radius: 9999px;
-  transition: all 0.3s;
+  padding: 0.75rem 1.75rem;
+  border-radius: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   color: rgb(75, 85, 99);
   background: transparent;
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.navItem::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+
+.navItem:hover::before {
+  width: 200%;
+  height: 200%;
 }
 
 .navItem:hover {
   color: rgb(5, 150, 105);
-  background: rgba(16, 185, 129, 0.05);
+  transform: translateY(-2px);
 }
 
 .navItem.active {
-  background: linear-gradient(to right, rgb(5, 150, 105), rgb(101, 163, 13));
+  background: linear-gradient(135deg, rgb(5, 150, 105), rgb(101, 163, 13));
   color: white;
-  font-weight: 600;
-  box-shadow: 0 4px 6px rgba(5, 150, 105, 0.2);
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
+  transform: translateY(-2px);
 }
 
+.navItem.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: rgb(5, 150, 105);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1.3);
+  }
+}
+
+/* Mobile Menu Button */
 .mobileMenuBtn {
   display: block;
-  padding: 0.5rem;
-  border-radius: 0.75rem;
-  background: rgba(16, 185, 129, 0.05);
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(16, 185, 129, 0.1);
+  border: 2px solid rgba(16, 185, 129, 0.2);
   color: rgb(5, 150, 105);
   cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileMenuBtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(163, 230, 53, 0.1));
+  transform: translateX(-100%);
+  transition: transform 0.4s;
+}
+
+.mobileMenuBtn:hover::before {
+  transform: translateX(0);
+}
+
+.mobileMenuBtn:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -115,29 +270,68 @@
   }
 }
 
+/* Mobile Menu */
 .mobileMenu {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
   border-top: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobileNavItem {
   display: block;
   width: 100%;
   text-align: left;
-  padding: 1rem 1.5rem;
+  padding: 1.25rem 2rem;
   text-transform: capitalize;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
   color: rgb(75, 85, 99);
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-  font-weight: 500;
+  font-size: 1.125rem;
+  transition: all 0.3s;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileNavItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgb(16, 185, 129), rgb(163, 230, 53));
+  transform: scaleY(0);
+  transition: transform 0.3s;
+}
+
+.mobileNavItem:hover::before {
+  transform: scaleY(1);
 }
 
 .mobileNavItem:hover {
-  background: rgba(16, 185, 129, 0.05);
+  background: rgba(16, 185, 129, 0.08);
   color: rgb(5, 150, 105);
+  padding-left: 2.5rem;
+}
+
+.mobileNavItem.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(163, 230, 53, 0.15));
+  color: rgb(5, 150, 105);
+  font-weight: 700;
 }

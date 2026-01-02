@@ -16,39 +16,25 @@ const Projects = () => {
       description: 'Palestine Information Card and Gaza Genocide documentation with DOM manipulation, semantic HTML, multimedia integration, and internal navigation.',
       tech: ['HTML5', 'CSS3', 'DOM Tree', 'Semantic Markup'],
       github: 'https://github.com/Hadil174/caw-labs/tree/lab2-setup/lab1',
-      demo: 'https://lab1-demo.netlify.app',
+     
       gradient: 'emeraldTealCyan'
     },
-    {
-      title: 'Git & GitHub Mastery',
-      description:' Version Control System fundamentals',
-      tech : ['Git', 'GitHub', 'Version Control', 'Branching'],
-      github: 'https://github.com/Hadil174/caw-labs/tree/lab2-setup/lab2',
-      demo: 'https://lab2-demo.netlify.app',
-      gradient: 'limeGreenEmerald'
-    },
+   
     {
       title: 'Lab 3: Node.js Fundamentals',
       description: 'Server-side JavaScript with Node.js core modules, NPM package management, file system operations, and custom module creation.',
       tech: ['Node.js', 'NPM', 'File System', 'Modules'],
       github: 'https://github.com/Hadil174/caw-labs/tree/lab2-setup/caw',
-      demo: 'https://lab3-demo.netlify.app',
+      
       gradient: 'amberOrangeRed'
     },
-    {
-       title: 'Lab 4: Unit Testing with Jest',
-      description: 'Comprehensive JavaScript testing framework implementation with test suites, assertions, array manipulation tests, and TDD practices.',
-      tech: ['Jest', 'Unit Testing', 'TDD', 'JavaScript'],
-      github: 'https://github.com/Hadil174/caw-labs/tree/lab2-setup/lab4_jest',
-      demo: 'https://lab4-demo.netlify.app',
-      gradient: 'greenEmeraldTeal'
-    },
+    
     {
          title: 'Lab 5: React Components & State',
       description: 'Interactive React applications with state management, event handling, form validation, dynamic lists with map iteration, and component composition.',
       tech: ['React', 'Hooks', 'State Management', 'Events'],
       github: 'https://github.com/yourusername/lab5-movies',
-      demo: 'https://lab5-demo.netlify.app',
+     
       gradient: 'yellowAmberOrange'
     },
     {
@@ -56,22 +42,22 @@ const Projects = () => {
       description: 'Modern React development environment with Vite build tool, ES modules, component architecture, props system, and CSS conventions.',
       tech: ['React', 'Vite', 'ES Modules', 'Components'],
       github: 'https://github.com/Hadil174/caw-labs/tree/lab2-setup/lab6',
-      demo: 'https://lab6-demo.netlify.app',
+    
       gradient: 'tealCyanBlue'
     },
     {
-      title: 'Lab 7: Hotel Management System',
+      title: 'pfe: Hotel Management System',
       description: 'Full-stack hotel management platform with room booking, reservation system, customer management, payment processing, and admin dashboard built with Laravel backend.',
       tech: ['React', 'Laravel', 'MySQL', 'REST API'],
       github: 'https://github.com/Hadil174/hadil',
-      demo: 'https://lab7-demo.netlify.app',
+      
       gradient: 'limeEmeraldGreen'
     },
    
   ];
 
   return (
-    <section className={styles.projects}>
+   <section id="projects" className={styles.projects}>
       {/* Animated Background */}
       <div className={styles.background}></div>
       
@@ -131,7 +117,7 @@ const Projects = () => {
         <div className={`${styles.cta} ${isVisible ? styles.ctaVisible : ''}`}>
           <p className={styles.ctaText}>Ready to see more amazing work?</p>
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/Hadil174"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaButton}

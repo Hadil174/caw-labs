@@ -1,23 +1,47 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, Rocket, Code, Palette, Zap } from 'lucide-react';
+import { Sparkles, Code, Palette, Zap } from 'lucide-react';
 import styles from './Hero.module.css';
 
 const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeTextLine, setActiveTextLine] = useState(0);
 
   useEffect(() => {
-    setIsVisible(true);
-    
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 20,
-        y: (e.clientY / window.innerHeight) * 20
-      });
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Start fading after 20% of viewport height
+      const fadeStart = windowHeight * 0.2;
+      const fadeEnd = windowHeight * 0.8;
+      
+      if (scrollPosition < fadeStart) {
+        setScrollProgress(0);
+      } else if (scrollPosition > fadeEnd) {
+        setScrollProgress(1);
+      } else {
+        const progress = (scrollPosition - fadeStart) / (fadeEnd - fadeStart);
+        setScrollProgress(progress);
+      }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Auto-display text lines on mount
+  useEffect(() => {
+    const timers = [
+      setTimeout(() => setActiveTextLine(1), 500),
+      setTimeout(() => setActiveTextLine(2), 1000),
+      setTimeout(() => setActiveTextLine(3), 1500),
+      setTimeout(() => setActiveTextLine(4), 2000),
+      setTimeout(() => setActiveTextLine(5), 2500),
+    ];
+
+    return () => timers.forEach(timer => clearTimeout(timer));
   }, []);
 
   const scrollToSection = (id) => {
@@ -33,26 +57,26 @@ const Hero = () => {
     { icon: Zap, text: 'Vite', color: 'yellow' }
   ];
 
+  // Calculate opacity for fade out effect - smoother transition
+  const contentOpacity = Math.max(0, 1 - scrollProgress * 1.5);
+  const contentTranslateY = scrollProgress * 50;
+
   return (
     <section id="home" className={styles.hero}>
-      {/* Floating Elements Background */}
-      <div className={styles.floatingElements}>
-        <div className={styles.floatingCircle} style={{ 
-          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` 
-        }}></div>
-        <div className={styles.floatingSquare} style={{ 
-          transform: `translate(${-mousePosition.x}px, ${mousePosition.y}px)` 
-        }}></div>
-        <div className={styles.floatingTriangle} style={{ 
-          transform: `translate(${mousePosition.x}px, ${-mousePosition.y}px)` 
-        }}></div>
-      </div>
-
       <div className={styles.container}>
-        <div className={`${styles.grid} ${isVisible ? styles.visible : ''}`}>
-          <div className={styles.textContent}>
-            {/* Animated Badge */}
-            <div className={styles.badge}>
+        <div className={styles.grid}>
+          {/* Text Content - Left Side */}
+          <div 
+            className={styles.textContent}
+            style={{
+              opacity: contentOpacity,
+              transform: `translateY(${contentTranslateY}px)`
+            }}
+          >
+            {/* Badge */}
+            <div 
+              className={`${styles.badge} ${activeTextLine >= 1 ? styles.visible : ''}`}
+            >
               <span className={styles.badgeGlow}></span>
               <span className={styles.badgeText}>
                 <Sparkles className={styles.badgeIcon} />
@@ -61,35 +85,25 @@ const Hero = () => {
               </span>
             </div>
 
-            {/* Animated Title */}
+            {/* Title */}
             <h1 className={styles.title}>
-              <span className={styles.titleLine1}>
-                {['H', 'e', 'l', 'l', 'o', ',', ' ', 'I', ' ', 'a', 'm'].map((char, i) => (
-                  <span 
-                    key={i} 
-                    className={styles.char}
-                    style={{ animationDelay: `${i * 0.05}s` }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </span>
-                ))}
+              <span 
+                className={`${styles.titleLine1} ${activeTextLine >= 2 ? styles.visible : ''}`}
+              >
+                Hello, I am
               </span>
-              <span className={styles.titleLine2}>
-                {['H', 'a', 'd', 'i', 'l'].map((char, i) => (
-                  <span 
-                    key={i} 
-                    className={styles.charGradient}
-                    style={{ animationDelay: `${(i + 11) * 0.05}s` }}
-                  >
-                    {char}
-                  </span>
-                ))}
+              <span 
+                className={`${styles.titleLine2} ${activeTextLine >= 3 ? styles.visible : ''}`}
+              >
+                Hadil
                 <span className={styles.cursor}>|</span>
               </span>
             </h1>
 
-            {/* Subtitle with Icon */}
-            <div className={styles.subtitleWrapper}>
+            {/* Subtitle */}
+            <div 
+              className={`${styles.subtitleWrapper} ${activeTextLine >= 4 ? styles.visible : ''}`}
+            >
               <div className={styles.subtitleLine}></div>
               <p className={styles.subtitle}>
                 <Code className={styles.subtitleIcon} />
@@ -99,7 +113,9 @@ const Hero = () => {
             </div>
 
             {/* Description */}
-            <p className={styles.description}>
+            <p 
+              className={`${styles.description} ${activeTextLine >= 5 ? styles.visible : ''}`}
+            >
               Crafting <span className={styles.highlight}>pixel-perfect</span>, 
               high-performance web experiences with modern technologies. 
               Passionate about <span className={styles.highlight}>clean code</span> and 
@@ -113,8 +129,8 @@ const Hero = () => {
                 return (
                   <div 
                     key={i} 
-                    className={`${styles.skillPill} ${styles[skill.color]}`}
-                    style={{ animationDelay: `${i * 0.1 + 0.5}s` }}
+                    className={`${styles.skillPill} ${styles[skill.color]} ${activeTextLine >= 5 ? styles.visible : ''}`}
+                    style={{ transitionDelay: `${i * 100}ms` }}
                   >
                     <Icon className={styles.skillIcon} />
                     <span>{skill.text}</span>
@@ -123,19 +139,11 @@ const Hero = () => {
               })}
             </div>
 
-            {/* CTA Buttons */}
+            {/* Button */}
             <div className={styles.buttons}>
               <button
-                onClick={() => scrollToSection('projects')}
-                className={styles.primaryBtn}
-              >
-                <span className={styles.btnShine}></span>
-                <span className={styles.btnText}>View My Work</span>
-                <Rocket className={styles.btnIcon} />
-              </button>
-              <button
                 onClick={() => scrollToSection('contact')}
-                className={styles.secondaryBtn}
+                className={`${styles.secondaryBtn} ${activeTextLine >= 5 ? styles.visible : ''}`}
               >
                 <span className={styles.btnBorder}></span>
                 <span className={styles.btnText}>Contact Me</span>
@@ -143,7 +151,7 @@ const Hero = () => {
             </div>
 
             {/* Stats */}
-            <div className={styles.stats}>
+            <div className={`${styles.stats} ${activeTextLine >= 5 ? styles.visible : ''}`}>
               <div className={styles.stat}>
                 <span className={styles.statNumber}>8+</span>
                 <span className={styles.statLabel}>Projects</span>
@@ -161,18 +169,22 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Image Section with Creative Elements */}
-          <div className={styles.imageContent}>
+          {/* Image - Right Side */}
+          <div 
+            className={styles.imageContent}
+            style={{
+              opacity: contentOpacity,
+              transform: `translateY(${contentTranslateY}px)`
+            }}
+          >
             <div className={styles.imageGlow}></div>
             
-            {/* Decorative Rings */}
             <div className={styles.decorativeRing1}></div>
             <div className={styles.decorativeRing2}></div>
             <div className={styles.decorativeRing3}></div>
 
             <div className={styles.imageWrapper}>
               <div className={styles.imageContainer}>
-                {/* Gradient Overlay */}
                 <div className={styles.imageOverlay}></div>
                 
                 <img
@@ -181,37 +193,13 @@ const Hero = () => {
                   className={styles.image}
                 />
 
-                {/* Floating Badge */}
                 <div className={styles.badge3d}>
-                  <span className={styles.badge3dInner}>⚡</span>
-                </div>
-
-                {/* Corner Accents */}
-                <div className={styles.cornerAccent} style={{ top: '-10px', left: '-10px' }}></div>
-                <div className={styles.cornerAccent} style={{ top: '-10px', right: '-10px' }}></div>
-                <div className={styles.cornerAccent} style={{ bottom: '-10px', left: '-10px' }}></div>
-                <div className={styles.cornerAccent} style={{ bottom: '-10px', right: '-10px' }}></div>
-              </div>
-
-              {/* Social Proof */}
-              <div className={styles.socialProof}>
-                <div className={styles.socialProofIcon}>✨</div>
-                <div className={styles.socialProofText}>
-                  <span className={styles.socialProofTitle}>Ready to Build</span>
-                  <span className={styles.socialProofSubtitle}>Let's create something amazing</span>
+                  <span className={styles.badge3dInner}>💻</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className={styles.scrollIndicator}>
-        <div className={styles.mouse}>
-          <div className={styles.mouseWheel}></div>
-        </div>
-        <span className={styles.scrollText}>Scroll to explore</span>
       </div>
     </section>
   );

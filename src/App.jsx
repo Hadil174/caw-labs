@@ -66,7 +66,7 @@ function App() {
             <p className={styles.footerText}>
               Built with ❤️ using React + Vite
             </p>
-            <p className={styles.footerCopyright}>2025 Your Name. All rights reserved.</p>
+            <p className={styles.footerCopyright}>2025 Hadil. All rights reserved.</p>
           </div>
         </footer>
       </div>

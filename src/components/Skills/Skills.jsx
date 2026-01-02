@@ -43,7 +43,7 @@ const Skills = () => {
   ];
 
   return (
-    <section className={styles.skillsSection}>
+    <section id="skills" className={styles.skillsSection}>
       {/* Animated Background Orbs */}
       <div className={styles.backgroundOrbs}>
         <div className={styles.orb1}></div>
@@ -165,20 +165,7 @@ const Skills = () => {
         </div>
 
         {/* Bottom Stats */}
-        <div className={`${styles.statsGrid} ${isVisible ? styles.statsVisible : ''}`}>
-          {[
-            { label: 'Languages', value: skillsData.languages.length },
-            { label: 'Frameworks', value: skillsData.frameworks.length },
-            { label: 'Tools', value: skillsData.tools.length },
-            { label: 'Databases', value: skillsData.databases.length }
-          ].map((stat) => (
-            <div key={stat.label} className={styles.statCard}>
-              <div className={styles.statValue}>{stat.value}+</div>
-              <div className={styles.statLabel}>{stat.label}</div>
-              <div className={styles.statGlow}></div>
-            </div>
-          ))}
-        </div>
+        
       </div>
     </section>
   );

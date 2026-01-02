@@ -24,7 +24,7 @@ const Navbar = ({ activeSection }) => {
               <div className={styles.logoGlow}></div>
               <Code2 className={styles.logoIcon} />
             </div>
-            <span className={styles.logoText}>Ichta Hadil takoua allah</span>
+            <span className={styles.logoText}></span>
           </div>
 
           {/* Desktop Menu */}
