@@ -462,7 +462,7 @@ function Home() {
             <div style={styles.imageBorder}>
               <div style={styles.imageFrame}>
                 <img 
-                  src="/src/assets/images/serine.jpg"   
+                  src="/images/serine.jpg"   
                   alt="Serine - Profile Picture" 
                   style={styles.profileImage}
                 />
