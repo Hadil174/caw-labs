@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Projects from './components/Projects/Projects';
+import FeaturedWork from './components/FeaturedWork/FeaturedWork';
 import Skills from './components/Skills/Skills';
 import Contact from './components/Contact/Contact';
 import styles from './App.module.css';
@@ -10,6 +11,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  // Track mouse for animated background
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -18,6 +20,7 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // IntersectionObserver for updating active section
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -42,7 +45,7 @@ function App() {
       {/* Animated Background */}
       <div className={styles.background}>
         <div className={styles.bgGradient}></div>
-        <div 
+        <div
           className={styles.mouseGlow}
           style={{
             left: `${mousePosition.x / 10}px`,
@@ -54,12 +57,16 @@ function App() {
       </div>
 
       <div className={styles.content}>
+        {/* Navbar */}
         <Navbar activeSection={activeSection} />
+
+        {/* Sections */}
         <Hero />
         <Projects />
+        <FeaturedWork />   
         <Skills />
         <Contact />
-        
+
         {/* Footer */}
         <footer className={styles.footer}>
           <div className={styles.footerContent}>

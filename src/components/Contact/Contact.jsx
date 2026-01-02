@@ -155,8 +155,8 @@ const Contact = () => {
     },
     { 
       icon: Smartphone, 
-      value: '+213 XXX XXX XXX',
-      link: 'tel:+213XXXXXXXXX',
+      value: '+213 780341697',
+      link: 'tel:+213780341697',
       label: 'Call me'
     }
   ];
