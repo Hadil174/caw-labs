@@ -410,11 +410,11 @@ function FeaturedWork() {
               style={styles.videoThumbnail} 
               onMouseEnter={handleVideoPlay}
             >
-              <img 
-                src="images/duo bord.mp4" 
-                alt="Video Thumbnail" 
-                style={styles.videoThumbnailImg}
-              />
+             <video ref={videoRef} controls autoPlay style={styles.video}>
+                <source src="/images/duo-bord.mp4" type="video/mp4" />
+                 Your browser does not support the video tag.
+              </video>
+
               <div className="play-overlay" style={styles.playOverlay}>
                 <div className="play-button" style={styles.playButton}>
                   <svg viewBox="0 0 24 24" fill="currentColor" style={styles.playButtonSvg}>
