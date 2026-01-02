@@ -411,7 +411,7 @@ function FeaturedWork() {
               onMouseEnter={handleVideoPlay}
             >
              <video ref={videoRef} controls autoPlay style={styles.video}>
-                <source src="/images/duo-bord.mp4" type="video/mp4" />
+                <source src="/images/duo bord.mp4" type="video/mp4" />
                  Your browser does not support the video tag.
               </video>
 
