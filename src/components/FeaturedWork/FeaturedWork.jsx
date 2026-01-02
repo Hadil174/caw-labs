@@ -411,7 +411,7 @@ function FeaturedWork() {
               onMouseEnter={handleVideoPlay}
             >
               <img 
-                src="src/assets/images/duo bord.mp4" 
+                src="images/duo bord.mp4" 
                 alt="Video Thumbnail" 
                 style={styles.videoThumbnailImg}
               />
