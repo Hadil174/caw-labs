@@ -7,52 +7,52 @@ function FeaturedWork() {
 
   const projectImages = [
     {
-      url: 'src/assets/images/x10.jpg',
+      url: '/images/x10.jpg',
       title: 'Hotel Homepage',
       description: 'Elegant and modern landing page'
     },
     {
-      url: 'src/assets/images/x01.jpg',
+      url: '/images/x01.jpg',
       title: 'Reservation Management System',
       description: 'Complete booking system with approval workflow'
     },
     {
-      url: 'src/assets/images/x02.jpg',
+      url: '/images/x02.jpg',
       title: 'Room Booking Interface',
       description: 'User-friendly booking form with real-time availability'
     },
     {
-      url: 'src/assets/images/x03.jpg',
+      url: '/images/x03.jpg',
       title: 'Payment Confirmation',
       description: 'Secure payment processing and booking confirmation'
     },
     {
-      url: 'src/assets/images/x04.jpg',
+      url: '/images/x04.jpg',
       title: 'Booking Success Page',
       description: 'Detailed booking reference and receipt'
     },
     {
-      url: 'src/assets/images/x05.jpg',
+      url: '/images/x05.jpg',
       title: 'PayPal Integration',
       description: 'Multiple payment methods including PayPal'
     },
     {
-      url: 'src/assets/images/x06.jpg',
+      url: '/images/x06.jpg',
       title: 'Financial Dashboard',
       description: 'Real-time revenue tracking and analytics'
     },
     {
-      url: 'src/assets/images/x07.jpg',
+      url: '/images/x07.jpg',
       title: 'Employee Management',
       description: 'Staff management and payroll system'
     },
     {
-      url: 'src/assets/images/x08.jpg',
+      url: '/images/x08.jpg',
       title: 'Staff Directory',
       description: 'Complete employee information system'
     },
     {
-      url: 'src/assets/images/hi.jpg',
+      url: '/images/hi.jpg',
       title: 'Room Gallery',
       description: 'Beautiful showcase of available rooms'
     }
